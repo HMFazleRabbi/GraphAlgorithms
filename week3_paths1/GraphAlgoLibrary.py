@@ -140,17 +140,31 @@ def LoadGraphFromFile(fname):
     for (a, b) in edges:
         radj[b - 1].append(a - 1)
 
-    # Graph
+    # DiGraph
     diGraph = Graph(n, m, adj)
     DiGraph_DFS(diGraph)
-    diGraph.print()
+    # diGraph.print()
 
-    # Reverse Graph
+    # DiReverse Graph
     revDiGraph = Graph(n, m, radj)
     DiGraph_DFS(revDiGraph)
+    # revDiGraph.print()
 
     return n, m, adj, diGraph, revDiGraph
 
+def ConvertToUndirectedAdjList(adj):
+    edges=[]
+    for u in range(len(adj)):
+        for v in adj[u]:
+            edges.append([u,v])
+            edges.append([v,u])
+
+    # Adj list
+    newAdjList = [[] for _ in range(len(adj))]
+    for (a, b) in edges:
+        newAdjList[a].append(b)
+
+    return newAdjList
 
 if __name__ == '__main__':
 

@@ -21,7 +21,9 @@ def number_of_components(adj):
             result = result + 1
     return result
 
-
+# ////////////////////////////////////
+# MAIN
+# ////////////////////////////////////
 if __name__ == '__main__':
     # Example:   4 4 1 2 3 2 4 3 1 4 1 4
 
