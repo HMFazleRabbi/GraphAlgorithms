@@ -66,13 +66,14 @@ def dijkstra(s, t, G):
 
 # Assuming no negative cycle and no -ve wqeights
 def native(s, t, G):
-	dist=[-1 for _ in range(len(adj))]
+	dist=[-1 for _ in range(G.n)]
 
     # Init distance and path
 	dist=[-1 for _ in range(G.n)]
 	prev=[-1 for _ in range(G.n)]
 	path=[]
 	state=True
+	iteration=0
 
 	
 	# Edhe list
@@ -83,6 +84,11 @@ def native(s, t, G):
 				if (relax (u, v, G, dist)):
 					prev[v]=u
 					state=True
+
+		# Stop 
+		if (iteration==(G.n-1)): 
+			break
+		iteration=iteration+1
 
 	#Target reachable
 	if (dist[t]==-1):
@@ -113,6 +119,6 @@ if __name__ == '__main__':
     
 	# Shortest path
     # shortest_path=dijkstra(s=0, t=3, G=G)
-    shortest_path=native(s=0, t=4, G=G)
+    shortest_path,pathlength,length =native(s=0, t=4, G=G)
     print(shortest_path)
 

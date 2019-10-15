@@ -32,8 +32,8 @@ class Graph():
 
     # Pre-post variable
         self.clock = 0
-        self.preVisit = [0 for x in range(n)]
-        self.postVisit = [0 for x in range(n)]
+        self.preVisit = [0 for x in range(self.n)]
+        self.postVisit = [0 for x in range(self.n)]
     # Connected Components counter
         self.ccompCount = 0
 
@@ -44,10 +44,12 @@ class Graph():
 
     def resetPrePost(self):
         self.clock=0
-        self.preVisit = [0 for x in range(n)]
-        self.postVisit = [0 for x in range(n)]
+        self.preVisit = [0 for x in range(self.n)]
+        self.postVisit = [0 for x in range(self.n)]
 
     def print(self):
+        
+        print("n m: %d %d" % (self.n, self.m))
         print("Adj List\t\t", self.adj)
         print("Weight List\t\t", self.w)
         print("Vertices\t\t", self.V)
@@ -77,20 +79,23 @@ def relax (u, v, G, dist):
 
 
 def DiGraph_DFS(G):
-    visited = [False for _ in range(len(G.V))]
+    visited = [False for _ in range(G.n)]
 
     for v in G.V:
         if not visited[v]:
             Explore(G, v, visited)
             G.ccompCount = G.ccompCount + 1
 
-
-def reach(G, x, y):
+def reachall(G, s):
     # write your code here
-    visited = [False for _ in range(len(G.V))]
-    Explore(G, x, visited)
-    return int(visited[y])
+    visited = [False for _ in range(G.n)]
+    Explore(G, s, visited)
+    return visited
 
+def reach(G, s, t):
+    # write your code here
+    visited = reach(G, s)
+    return int(visited[t])
 
 def acyclic(G):
     cyclic = 0
@@ -119,7 +124,7 @@ def toposort(G):
     return order
 
 def number_of_strongly_connected_components(G, revG):
-    visited = [False for _ in range(len(revG.V))]
+    visited = [False for _ in range(revG.n)]
     result = 0
     #write your code here
     order=toposort(revG)
